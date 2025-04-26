@@ -31,7 +31,7 @@ canvas_d3d11::canvas_d3d11(ID3D11Device* device, ID3D11DeviceContext* devctx, ID
 
     D3D11_INPUT_ELEMENT_DESC layout[] = {
         {
-            .SemanticName = "SV_POSITION",
+            .SemanticName = "POSITION",
             .SemanticIndex = 0,
             .Format = DXGI_FORMAT_R32G32_FLOAT,
             .InputSlot = 0,
