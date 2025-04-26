@@ -1,5 +1,5 @@
-#ifndef KEYBOARDLATENCYTESTER_IMCONTEXT_HPP
-#define KEYBOARDLATENCYTESTER_IMCONTEXT_HPP
+#ifndef WINDOWSCOLORBLASTER_IMCONTEXT_HPP
+#define WINDOWSCOLORBLASTER_IMCONTEXT_HPP
 #include "imgui.h"
 #include "implot.h"
 #include <unordered_map>
@@ -17,9 +17,9 @@ public:
     imcontext();
     bool update();
     ~imcontext();
-    const ImVec4 background_color = ImVec4(200000.f, 300000.f, 600000.f, 1.00f);
+    const ImVec4 background_color = ImVec4(0.f, 0.f, 0.f, 1.00f);
 private:
 };
 
 
-#endif //KEYBOARDLATENCYTESTER_IMCONTEXT_HPP
+#endif //WINDOWSCOLORBLASTER_IMCONTEXT_HPP

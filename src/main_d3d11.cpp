@@ -2,8 +2,12 @@
 #include "imgui_impl_win32.h"
 #include "imgui_impl_dx11.h"
 #include <d3d11.h>
+#include <iostream>
+#include <ostream>
 #include <tchar.h>
 #include "imcontext.hpp"
+
+#include "canvas/canvas_d3d11.h"
 
 // Data
 static ID3D11Device*            g_pd3dDevice = NULL;
@@ -46,6 +50,7 @@ int main(int, char**)
     ImGui_ImplWin32_Init(hwnd);
     ImGui_ImplDX11_Init(g_pd3dDevice, g_pd3dDeviceContext);
 
+
     ImVec4 clear_color = context.background_color;
 
     // Main loop
@@ -71,11 +76,16 @@ int main(int, char**)
         ImGui_ImplDX11_NewFrame();
         ImGui_ImplWin32_NewFrame();
 
+        static canvas_d3d11 canvas(g_pd3dDevice, g_pd3dDeviceContext, g_mainRenderTargetView, io.DisplaySize.x, io.DisplaySize.y);
+
         context.update();
 
         const float clear_color_with_alpha[4] = { clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w };
         g_pd3dDeviceContext->OMSetRenderTargets(1, &g_mainRenderTargetView, NULL);
         g_pd3dDeviceContext->ClearRenderTargetView(g_mainRenderTargetView, clear_color_with_alpha);
+
+        canvas.draw();
+
         ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
         // Update and Render additional Platform Windows
