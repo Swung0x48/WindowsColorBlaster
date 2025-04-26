@@ -28,4 +28,18 @@ if (WIN32)
     target_link_libraries(${OUTPUT_NAME_DX11} ImGui)
     target_link_libraries(${OUTPUT_NAME_DX11} ImPlot)
     target_link_libraries(${OUTPUT_NAME_DX11} ${DirectX11_LIBRARY})
+
+    add_custom_command(
+            OUTPUT ${CMAKE_BINARY_DIR}/shader
+            COMMAND ${CMAKE_COMMAND} -E copy_directory
+            ${CMAKE_SOURCE_DIR}/src/canvas/shader
+            ${CMAKE_BINARY_DIR}/shader
+            DEPENDS ${CMAKE_SOURCE_DIR}/src/canvas/shader
+            COMMENT "Copying shader directory"
+    )
+    add_custom_target(copy_shader ALL
+            DEPENDS ${CMAKE_BINARY_DIR}/shader
+    )
+
+    add_dependencies(${OUTPUT_NAME_DX11} copy_shader)
 endif()
